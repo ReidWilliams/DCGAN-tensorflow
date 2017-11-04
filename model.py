@@ -307,6 +307,8 @@ class DCGAN(object):
       if reuse:
         scope.reuse_variables()
 
+      print('310: %s' % image.get_shape())
+
       if not self.y_dim:
         h0 = lrelu(conv2d(image, self.df_dim, name='d_h0_conv'))
         h1 = lrelu(self.d_bn1(conv2d(h0, self.df_dim*2, name='d_h1_conv')))
