@@ -8,7 +8,7 @@ import numpy as np
 from six.moves import xrange
 
 from ops import *
-import rew_ops
+import rew_ops as rwo
 from utils import *
 
 def conv_out_size_same(size, stride):
@@ -331,21 +331,21 @@ class DCGAN(object):
     with tf.variable_scope("generator") as scope:
       if not self.y_dim:
         
-        bn = BN()
+        bn = rwo.BN()
 
         # number of pixels on each side for starting 2d dimensions
         _len = int(64 / 16)
 
-        t = dense(inputs, _len*_len*512)
-        t = elu(bn(reshape(t, (tf.shape(t)[0], _len, _len, 512))))
+        t = rwo.dense(inputs, _len*_len*512)
+        t = rwo.elu(rwo.bn(rwo.reshape(t, (tf.shape(t)[0], _len, _len, 512))))
 
-        t = elu(bn(conv2dtr(t, 512)))
-        t = elu(bn(conv2dtr(t, 256)))
-        t = elu(bn(conv2dtr(t, 128)))
+        t = rwo.elu(rwo.bn(rwo.conv2dtr(t, 512)))
+        t = rwo.elu(rwo.bn(rwo.conv2dtr(t, 256)))
+        t = rwo.elu(rwo.bn(rwo.conv2dtr(t, 128)))
 
         # final conv2d  transpose to get to filter depth of 3, for rgb channels
-        logits = conv2dtr(t, 3)
-        return tanh(logits)
+        logits = rwo.conv2dtr(t, 3)
+        return rwo.tanh(logits)
 
       else:
         raise ValueError('expected y_dim to be None') 
