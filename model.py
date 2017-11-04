@@ -337,11 +337,11 @@ class DCGAN(object):
         _len = int(64 / 16)
 
         t = rwo.dense(z, _len*_len*512)
-        t = rwo.elu(rwo.bn(rwo.reshape(t, (tf.shape(t)[0], _len, _len, 512))))
+        t = rwo.elu(bn(rwo.reshape(t, (tf.shape(t)[0], _len, _len, 512))))
 
-        t = rwo.elu(rwo.bn(rwo.conv2dtr(t, 512)))
-        t = rwo.elu(rwo.bn(rwo.conv2dtr(t, 256)))
-        t = rwo.elu(rwo.bn(rwo.conv2dtr(t, 128)))
+        t = rwo.elu(bn(rwo.conv2dtr(t, 512)))
+        t = rwo.elu(bn(rwo.conv2dtr(t, 256)))
+        t = rwo.elu(bn(rwo.conv2dtr(t, 128)))
 
         # final conv2d  transpose to get to filter depth of 3, for rgb channels
         logits = rwo.conv2dtr(t, 3)
