@@ -336,7 +336,7 @@ class DCGAN(object):
         # number of pixels on each side for starting 2d dimensions
         _len = int(64 / 16)
 
-        t = rwo.dense(inputs, _len*_len*512)
+        t = rwo.dense(z, _len*_len*512)
         t = rwo.elu(rwo.bn(rwo.reshape(t, (tf.shape(t)[0], _len, _len, 512))))
 
         t = rwo.elu(rwo.bn(rwo.conv2dtr(t, 512)))
