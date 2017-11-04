@@ -14,12 +14,16 @@ def dense(inputs, units):
     return tf.layers.dense(inputs, units, kernel_initializer=he_init())
 
 # batch normalization
+# unclear how important, but use scale=True and epsilon 1e-5
+# from https://github.com/carpedm20/DCGAN-tensorflow/blob/b138300623b933e2076872e7f812ba553e862355/ops.py
 class BN:
     def __init__(self, is_training=True):
         self.is_training = is_training
 
     def __call__(self, inputs):
-        return tf.contrib.layers.batch_norm(inputs, updates_collections=None, is_training=self.is_training)
+        return tf.contrib.layers.batch_norm(
+            inputs, updates_collections=None, is_training=self.is_training,
+            scale=True, epsilon=1e-5)
 
 def flatten(inputs):
     return tf.contrib.layers.flatten(inputs)
