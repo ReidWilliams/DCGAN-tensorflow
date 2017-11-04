@@ -53,6 +53,13 @@ class DCGAN(object):
     self.gfc_dim = gfc_dim
     self.dfc_dim = dfc_dim
 
+    # batch normalization : deals with poor initialization helps gradient flow
+    self.d_bn1 = batch_norm(name='d_bn1')
+    self.d_bn2 = batch_norm(name='d_bn2')
+
+    if not self.y_dim:
+      self.d_bn3 = batch_norm(name='d_bn3')
+
     self.dataset_name = dataset_name
     self.input_fname_pattern = input_fname_pattern
     self.checkpoint_dir = checkpoint_dir
