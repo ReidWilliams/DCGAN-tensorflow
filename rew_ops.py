@@ -17,7 +17,7 @@ def conv2dtr(inputs, filters):
 def dense(inputs, units):
     return tf.layers.dense(inputs, units, 
         kernel_initializer=tf.random_normal_initializer(stddev=0.02),
-        bias_initializer=f.constant_initializer(0.0))
+        bias_initializer=tf.constant_initializer(0.0))
 
 # batch normalization
 # unclear how important, but use scale=True and epsilon 1e-5
