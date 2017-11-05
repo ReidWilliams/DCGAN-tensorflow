@@ -31,8 +31,11 @@ def flatten(inputs):
 def reshape(inputs, shape):
     return tf.reshape(inputs, shape)
 
-def elu(inputs):
-    return tf.nn.elu(inputs)
+#def elu(inputs):
+#    return tf.nn.elu(inputs)
+
+def lrelu(inputs, leak=0.2):
+    return tf.maximum(inputs, leak*inputs)
 
 def sigmoid(inputs):
     return tf.sigmoid(inputs)
